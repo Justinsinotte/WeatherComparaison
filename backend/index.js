@@ -5,7 +5,9 @@
 const express = require("express");
 const morgan = require("morgan");
 const port = 8888;
-express()
+express();
+
+const { test } = require("./handlers")
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
 
@@ -19,11 +21,7 @@ express()
   // Nothing to modify above this line
   // ---------------------------------
   // add new endpoints here 👇
-
-  .get("/test", (req, res) => {
-    res.status(200).json({ itWorked: true });
-  })
-
+  .get("/api/test", test)
   // add new endpoints here ☝️
   // ---------------------------------
   // Nothing to modify below this line
