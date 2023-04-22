@@ -1,35 +1,40 @@
 import { useState, useEffect } from "react";
-import { useParams, useLocation } from "react-router-dom";
-import styled from "styled-components";
-import SingleItem from "./SingleItem";
-import { FiXCircle, FiHeart } from "react-icons/fi";
+import { StyleSheet, Text, View, Button } from "react-native";
 
-const RecipeDetail = ({ isOpen, setIsOpen, recItemId, setRecItemId }) => {
-  const { state } = useLocation();
-  const [item, setItem] = useState(null);
-
-  const { itemId } = useParams();
-  const numberItemId = Number(itemId);
-  setRecItemId(numberItemId);
+const TestApi = () => {
+  const [test, setTest] = useState();
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
-    const fetchItem = async () => {
-      try {
-        const response = await fetch(`/api/test`);
-
-        const data = await response.json();
-
+    fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=45.5031824&lon=-73.5698065&appid=af8a520e181ab2f19f9ba63d21531604&units=metric `
+    )
+      .then((response) => {
         if (response.status === 200) {
-          setItem(data.data);
+          return response.json();
         } else {
-          console.error("Error: The item was not found.", data);
+          throw new Error("Network response was not ok");
         }
-      } catch (error) {
-        console.error("The was an error fetching the item:", error);
-      }
-    };
-    fetchItem();
-  }, [numberItemId]);
+      })
+      .then((data) => {
+        setTest(data);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log("Error fetching data:");
+      });
+  }, [click]);
 
-  if (item && item.image) {
-    return ();
+  const handleClick = () => {
+    setClick(!click);
+  };
+
+  return (
+    <View>
+      <Button title={"Test"} onPress={handleClick} />
+      {test !== undefined && <Text>{JSON.stringify(test.name)}</Text>}
+    </View>
+  );
+};
+
+export default TestApi;

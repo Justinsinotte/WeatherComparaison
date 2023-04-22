@@ -1,18 +1,24 @@
-"use strict";
+// "use strict";
 
 // import the needed node_modules.
 
 const express = require("express");
 const morgan = require("morgan");
-const port = 8888;
-express();
+const PORT = process.env.PORT || 3001;
+const { test } = require("./handlers");
+const cors = require("cors");
+const corsOptions = {
+  origin: "https://api.openweathermap.org/",
+};
 
-const { test } = require("./handlers")
+express()
   // Below are methods that are included in express(). We chain them for convenience.
   // --------------------------------------------------------------------------------
 
   // This will give us will log more info to the console. see https://www.npmjs.com/package/morgan
+  .use(cors(corsOptions))
   .use(morgan("tiny"))
+  .use(express.json())
   .use(express.json())
 
   // Any requests for static files will go into the public folder
@@ -34,4 +40,4 @@ const { test } = require("./handlers")
     });
   })
 
-  .listen(port, () => console.log(`Listening on port ${port}`));
+  .listen(PORT, () => console.log(`Listening on port ${PORT}`));

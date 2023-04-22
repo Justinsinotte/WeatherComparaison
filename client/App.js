@@ -1,11 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
+import TestApi from "./components/testApi";
 
 export default function App() {
   return (
     <View style={styles.container}>
       <Text>KIKIKIK</Text>
-      <Button title={"FUCKK"} />
+      <Button title={"Does Nothing"} />
+      <TestApi />
       <StatusBar style="auto" />
     </View>
   );
