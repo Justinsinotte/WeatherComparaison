@@ -1,14 +1,12 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
-
+// import Config from "react-native-config";
 const TestApi = () => {
   const [test, setTest] = useState();
   const [click, setClick] = useState(false);
 
   useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=45.5031824&lon=-73.5698065&appid=af8a520e181ab2f19f9ba63d21531604&units=metric `
-    )
+    fetch("http://10.0.0.102:3001/api/test")
       .then((response) => {
         if (response.status === 200) {
           return response.json();
