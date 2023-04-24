@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 
-const TempCard = () => {
+const FirstTempCard = () => {
   const [data, setData] = useState();
   const [click, setClick] = useState(false);
 
@@ -77,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TempCard;
+export default FirstTempCard;

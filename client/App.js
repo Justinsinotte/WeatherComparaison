@@ -1,11 +1,11 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
-import TempCard from "./components/TempCard.js";
+import FirstTempCard from "./components/FirstTempCard.js";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <TempCard />
+      <FirstTempCard />
       <StatusBar style="auto" />
     </View>
   );
