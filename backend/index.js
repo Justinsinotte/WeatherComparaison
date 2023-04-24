@@ -18,9 +18,9 @@ express()
   .use(express.static("public"))
 
   .get("/api/test", test)
-  .get("/", (req, res) => {
-    res.json({ success: true, message: "Welcome to backend!" });
-  })
+  // .get("/", (req, res) => {
+  //   res.json({ success: true, message: "Welcome to backend!" });
+  // })
 
   .get("*", (req, res) => {
     res.status(404).json({
