@@ -14,9 +14,14 @@ const { v4: uuidv4 } = require("uuid");
 
 const test = async (req, res) => {
   try {
+    // const response = await fetch(
+    //   `https://api.openweathermap.org/data/2.5/weather?lat=45.5031824&lon=-73.5698065&appid=${API}&units=metric`
+    // );
+
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=45.5031824&lon=-73.5698065&appid=${API}&units=metric`
+      `https://api.openweathermap.org/data/2.5/forecast?lat=45.5031824&lon=-73.5698065&appid=${API}&units=metric`
     );
+
     const data = await response.json();
     res.json(data);
   } catch (error) {
