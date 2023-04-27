@@ -2,9 +2,7 @@ import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 
-const FirstTempCard = () => {
-  const [firstData, setFirstData] = useState();
-
+const FirstTempCard = ({ firstData, setFirstData }) => {
   // const weatherIcon = `http://openweathermap.org/img/w/${firstData.weather[0].icon}.png`;
   // console.log(firstData);
 
@@ -49,7 +47,7 @@ const FirstTempCard = () => {
               <Image
                 style={styles.icon}
                 source={{
-                  uri: `https://openweathermap.org/img/w/${data.weather[0].icon}.png`,
+                  uri: `https://openweathermap.org/img/w/${data.weather[0].icon}@2x.png`,
                 }}
               />
             </View>
