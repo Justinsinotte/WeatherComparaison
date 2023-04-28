@@ -1,13 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
 import FirstTempCard from "./components/FirstTempCard.js";
+import CityInput from "./components/CityInput.js";
 import { useState, useEffect } from "react";
 
 export default function App() {
   const [firstData, setFirstData] = useState();
+  const [inputText, setInputText] = useState();
 
   return (
     <View style={styles.container}>
+      <CityInput inputText={inputText} setInputText={setInputText} />
       <FirstTempCard firstData={firstData} setFirstData={setFirstData} />
       <StatusBar style="auto" />
     </View>

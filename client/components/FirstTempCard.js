@@ -25,46 +25,46 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
   }, []);
   // console.log(firstData);
 
-  const WeatherForecast = ({ firstData }) => {
-    const noonTemps = firstData.list.filter((data) =>
-      data.dt_txt.includes("12:00:00")
-    );
-    const renderForecastCards = () => {
-      return noonTemps.map((data) => {
-        const date = new Date(data.dt * 1000);
-        const dateOptions = {
-          month: "long",
-          day: "numeric",
-        };
-        // console.log(data.weather[0].icon);
-        const dayOfMonth = date.toLocaleDateString("en-US", dateOptions);
-        const dayOfWeek = date.toLocaleDateString("en-US", dateOptions);
-        return (
-          <View key={data.dt} style={styles.card}>
-            <View style={styles.TempContainer}>
-              <Text style={styles.temp}>{Math.ceil(data.main.temp)}°C</Text>
-              <Text style={styles.day}>{dayOfMonth}</Text>
-              <Image
-                style={styles.icon}
-                source={{
-                  uri: `https://openweathermap.org/img/w/${data.weather[0].icon}@2x.png`,
-                }}
-              />
-            </View>
-          </View>
-        );
-      });
-    };
-    return renderForecastCards();
-  };
+  // const WeatherForecast = ({ firstData }) => {
+  //   const noonTemps = firstData.list.filter((data) =>
+  //     data.dt_txt.includes("12:00:00")
+  //   );
+  //   const renderForecastCards = () => {
+  //     return noonTemps.map((data) => {
+  //       const date = new Date(data.dt * 1000);
+  //       const dateOptions = {
+  //         month: "long",
+  //         day: "numeric",
+  //       };
+  //       // console.log(data.weather[0].icon);
+  //       const dayOfMonth = date.toLocaleDateString("en-US", dateOptions);
+  //       const dayOfWeek = date.toLocaleDateString("en-US", dateOptions);
+  //       return (
+  //         <View key={data.dt} style={styles.card}>
+  //           <View style={styles.TempContainer}>
+  //             <Text style={styles.temp}>{Math.ceil(data.main.temp)}°C</Text>
+  //             <Text style={styles.day}>{dayOfMonth}</Text>
+  //             <Image
+  //               style={styles.icon}
+  //               source={{
+  //                 uri: `https://openweathermap.org/img/w/${data.weather[0].icon}@2x.png`,
+  //               }}
+  //             />
+  //           </View>
+  //         </View>
+  //       );
+  //     });
+  //   };
+  //   return renderForecastCards();
+  // };
 
   return (
     <View style={styles.container}>
       {firstData !== undefined && (
         <View>
-          <Text style={styles.title}>{`${firstData.city.name}'s weather`}</Text>
+          <Text style={styles.title}>{`${firstData.name}`}</Text>
           <View style={styles.InfoContainer}>
-            <WeatherForecast firstData={firstData} />
+            {/* <WeatherForecast firstData={firstData} /> */}
           </View>
           {/* 
           <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
