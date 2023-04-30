@@ -6,7 +6,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
   const [weatherIcon, setWeatherIcon] = useState(null);
 
   useEffect(() => {
-    fetch("http://192.168.0.102:3001/api/test")
+    fetch("http://10.0.0.102:3001/api/test")
       .then((response) => {
         if (response.status === 200) {
           return response.json();
