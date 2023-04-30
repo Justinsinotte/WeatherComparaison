@@ -3,11 +3,10 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 
 const FirstTempCard = ({ firstData, setFirstData }) => {
-  // const weatherIcon = `http://openweathermap.org/img/w/${firstData.weather[0].icon}.png`;
-  // console.log(firstData);
+  const [weatherIcon, setWeatherIcon] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.0.102:3001/api/test")
+    fetch("http://192.168.0.102:3001/api/test")
       .then((response) => {
         if (response.status === 200) {
           return response.json();
@@ -17,69 +16,56 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
       })
       .then((data) => {
         setFirstData(data);
-        // console.log(data);
+        const icon =
+          data && data.weather
+            ? `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
+            : "";
+        setWeatherIcon(icon);
+        // console.log(icon);
       })
       .catch((error) => {
         console.log("Error fetching data:");
       });
   }, []);
-  // console.log(firstData);
-
-  // const WeatherForecast = ({ firstData }) => {
-  //   const noonTemps = firstData.list.filter((data) =>
-  //     data.dt_txt.includes("12:00:00")
-  //   );
-  //   const renderForecastCards = () => {
-  //     return noonTemps.map((data) => {
-  //       const date = new Date(data.dt * 1000);
-  //       const dateOptions = {
-  //         month: "long",
-  //         day: "numeric",
-  //       };
-  //       // console.log(data.weather[0].icon);
-  //       const dayOfMonth = date.toLocaleDateString("en-US", dateOptions);
-  //       const dayOfWeek = date.toLocaleDateString("en-US", dateOptions);
-  //       return (
-  //         <View key={data.dt} style={styles.card}>
-  //           <View style={styles.TempContainer}>
-  //             <Text style={styles.temp}>{Math.ceil(data.main.temp)}°C</Text>
-  //             <Text style={styles.day}>{dayOfMonth}</Text>
-  //             <Image
-  //               style={styles.icon}
-  //               source={{
-  //                 uri: `https://openweathermap.org/img/w/${data.weather[0].icon}@2x.png`,
-  //               }}
-  //             />
-  //           </View>
-  //         </View>
-  //       );
-  //     });
-  //   };
-  //   return renderForecastCards();
-  // };
-
+  // console.log(weatherIcon);
   return (
     <View style={styles.container}>
-      {firstData !== undefined && (
+      {firstData !== undefined && weatherIcon !== null && (
         <View>
-          <Text style={styles.title}>{`${firstData.name}`}</Text>
-          <View style={styles.InfoContainer}>
-            {/* <WeatherForecast firstData={firstData} /> */}
-          </View>
-          {/* 
+          <Text
+            style={styles.title}
+          >{`${firstData.name},${firstData.sys.country}`}</Text>
+          <Image
+            source={{ uri: weatherIcon }}
+            style={styles.icon}
+            alt={"WeatherIcon"}
+          ></Image>
+          <Text style={styles.description}>
+            {firstData.weather[0].description
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ")}
+          </Text>
+          <View style={styles.InfoContainer}></View>
+
           <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
-            data.main.temp
+            firstData.main.temp
+          )}°C`}</Text>
+
+          <Text style={styles.description}>{`Feels Like: ${Math.ceil(
+            firstData.main.feels_like
+          )}°C`}</Text>
+
+          <Text
+            style={styles.description}
+          >{`Today's Max Temperature: ${Math.ceil(
+            firstData.main.temp_max
           )}°C`}</Text>
           <Text
             style={styles.description}
           >{`Today's Max Temperature: ${Math.ceil(
-            data.main.temp_max
+            firstData.main.temp_min
           )}°C`}</Text>
-          <Text
-            style={styles.description}
-          >{`Today's Max Temperature: ${Math.ceil(
-            data.main.temp_min
-          )}°C`}</Text> */}
         </View>
       )}
     </View>
@@ -114,6 +100,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     marginBottom: 10,
+  },
+  icon: {
+    width: 100,
+    height: 100,
   },
   description: {
     fontSize: 16,

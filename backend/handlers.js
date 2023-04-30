@@ -19,7 +19,7 @@ const test = async (req, res) => {
     // );
 
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=paris&appid=${API}`
+      `https://api.openweathermap.org/data/2.5/weather?q=paris&appid=${API}&units=metric`
     );
 
     const data = await response.json();
