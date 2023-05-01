@@ -7,10 +7,18 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [firstData, setFirstData] = useState();
   const [inputText, setInputText] = useState();
+  const [city, setCity] = useState("");
 
+  const handleCitySelect = (cityName) => {
+    setCity(cityName);
+  };
   return (
     <View style={styles.container}>
-      <CityInput inputText={inputText} setInputText={setInputText} />
+      <CityInput
+        inputText={inputText}
+        setInputText={setInputText}
+        onSelectCity={handleCitySelect}
+      />
       <FirstTempCard firstData={firstData} setFirstData={setFirstData} />
       <StatusBar style="auto" />
     </View>
