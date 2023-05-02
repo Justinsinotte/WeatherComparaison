@@ -12,6 +12,7 @@ export default function App() {
   const handleCitySelect = (cityName) => {
     setCity(cityName);
   };
+  // console.log(city);
   return (
     <View style={styles.container}>
       <CityInput
