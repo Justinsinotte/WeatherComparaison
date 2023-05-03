@@ -36,11 +36,9 @@ const CityInput = ({ inputText, setInputText, onSelectCity }) => {
     setQuery(text);
   };
 
-  const handleSelectCity = (city) => {
-    setInputText(city.local_names.en || city.name);
-    onSelectCity(city);
-    setQuery("");
-    setCities([]);
+  const handleSelectCity = (item) => {
+    onSelectCity(item);
+    setInputText(item.local_names?.en || item.name);
   };
 
   const renderItem = ({ item }) => {
@@ -50,7 +48,7 @@ const CityInput = ({ inputText, setInputText, onSelectCity }) => {
       </TouchableOpacity>
     );
   };
-  console.log(cities);
+  // console.log(cities);
   return (
     <Autocomplete
       data={cities}

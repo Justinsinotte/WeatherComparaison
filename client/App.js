@@ -7,12 +7,14 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [firstData, setFirstData] = useState();
   const [inputText, setInputText] = useState();
-  const [city, setCity] = useState("");
+  const [city, setCity] = useState();
 
   const handleCitySelect = (cityName) => {
+    console.log(`setCity is ${cityName}`);
     setCity(cityName);
+    console.log(`city is ${city}`);
   };
-  // console.log(city);
+
   return (
     <View style={styles.container}>
       <CityInput
