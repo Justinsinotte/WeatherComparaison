@@ -16,22 +16,19 @@ const CityInput = ({ inputText, setInputText, onSelectCity }) => {
   const { API } = process.env;
 
   useEffect(() => {
-    const fetchCities = async () => {
-      const response = await fetch(
-        `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=2&appid=${API}`
-      );
-      const data = await response.json();
-      const citiesArray = Object.values(data);
-      setCities(citiesArray);
-    };
-
-    if (query) {
-      fetchCities();
-    } else {
-      setCities([]);
-    }
+    fetch("http://10.0.0.102:3001/api/citiesGet")
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {})
+      .catch((error) => {
+        console.log("Error fetching data:");
+      });
   }, [query]);
-
   const handleInputChange = (text) => {
     setQuery(text);
   };
