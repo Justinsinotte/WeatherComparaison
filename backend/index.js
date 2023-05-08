@@ -18,7 +18,6 @@ express()
   .use(express.static("public"))
 
   .get("/api/test", test)
-
   .get("/api/citiesGet", citiesGet)
   .get("*", (req, res) => {
     res.status(404).json({

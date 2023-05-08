@@ -20,6 +20,7 @@ const TestButton = () => {
       });
   };
   console.log(cities);
+
   return (
     <View>
       <Button title="Test" onPress={handleClick} />
