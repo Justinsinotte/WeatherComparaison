@@ -1,13 +1,18 @@
 import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
-
+import Config from "react-native-config";
 const FirstTempCard = ({ firstData, setFirstData }) => {
+  const { ACCUAPI } = process.env;
+  const { API } = process.env;
   const [weatherIcon, setWeatherIcon] = useState(null);
-
+  console.log(`API is ${API}`);
   useEffect(() => {
-    fetch("http://10.0.0.102:3001/api/citiesGet")
+    fetch(
+      `http://dataservice.accuweather.com/forecasts/v1/daily/1day/56186?apikey=${API}&metric=true`
+    )
       .then((response) => {
+        console.log(`The Then Response is ${response}`);
         if (response.status === 200) {
           return response.json();
         } else {
@@ -15,18 +20,17 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
         }
       })
       .then((data) => {
-        setCities(data);
+        setFirstData(data);
       })
       .catch((error) => {
         console.log("Error fetching data:");
       });
-
-    console.log(cities);
   }, []);
   // console.log(weatherIcon);
+  console.log(firstData);
   return (
     <View style={styles.container}>
-      {firstData !== undefined && weatherIcon !== null && (
+      {firstData !== undefined && (
         <View>
           <Text
             style={styles.title}
