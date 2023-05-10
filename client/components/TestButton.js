@@ -2,7 +2,6 @@ import { React, useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 
 const TestButton = () => {
-  const [cities, setCities] = useState(null);
   const handleClick = () => {
     fetch("http://10.0.0.102:3001/api/citiesGet")
       .then((response) => {

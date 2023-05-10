@@ -23,7 +23,7 @@ export default function App() {
         setInputText={setInputText}
         onSelectCity={handleCitySelect}
       /> */}
-      <TestButton />
+      {/* <TestButton /> */}
       <FirstTempCard firstData={firstData} setFirstData={setFirstData} />
       <StatusBar style="auto" />
     </View>

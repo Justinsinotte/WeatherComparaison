@@ -6,7 +6,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
   const [weatherIcon, setWeatherIcon] = useState(null);
 
   useEffect(() => {
-    fetch("http://10.0.0.102:3001/api/test")
+    fetch("http://10.0.0.102:3001/api/citiesGet")
       .then((response) => {
         if (response.status === 200) {
           return response.json();
@@ -15,17 +15,13 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
         }
       })
       .then((data) => {
-        setFirstData(data);
-        const icon =
-          data && data.weather
-            ? `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
-            : "";
-        setWeatherIcon(icon);
-        // console.log(icon);
+        setCities(data);
       })
       .catch((error) => {
         console.log("Error fetching data:");
       });
+
+    console.log(cities);
   }, []);
   // console.log(weatherIcon);
   return (
