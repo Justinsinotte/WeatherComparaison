@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import Config from "react-native-config";
-const FirstTempCard = ({ firstData, setFirstData }) => {
+
+const SecondTempCard = ({ firstData, setFirstData }) => {
   const { ACCUAPI } = process.env;
   const { API } = process.env;
   const [weatherIcon, setWeatherIcon] = useState(null);
@@ -141,4 +142,4 @@ const styles = StyleSheet.create({
   // },
 });
 
-export default FirstTempCard;
+export default SecondTempCard;
