@@ -33,9 +33,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
     <View style={styles.container}>
       {firstData !== undefined && (
         <View>
-          <Text
-            style={styles.title}
-          >{`${firstData.name},${firstData.sys.country}`}</Text>
+          <Text style={styles.title}>Hi</Text>
           <Image
             source={{ uri: weatherIcon }}
             style={styles.icon}
