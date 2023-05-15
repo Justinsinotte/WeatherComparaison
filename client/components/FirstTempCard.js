@@ -9,7 +9,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
   console.log(`API is ${API}`);
   useEffect(() => {
     fetch(
-      `http://dataservice.accuweather.com/forecasts/v1/daily/1day/56186?apikey=${API}&metric=true`
+      `http://dataservice.accuweather.com/currentconditions/v1/56186?apikey=${API}&metric=true`
     )
       .then((response) => {
         console.log(`The Then Response is ${response}`);
@@ -33,38 +33,33 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
     <View style={styles.container}>
       {firstData !== undefined && (
         <View>
-          <Text style={styles.title}>Hi</Text>
+          <Text style={styles.title}>Montreal</Text>
           <Image
             source={{ uri: weatherIcon }}
             style={styles.icon}
             alt={"WeatherIcon"}
           ></Image>
-          <Text style={styles.description}>
-            {firstData.weather[0].description
-              .split(" ")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
-          </Text>
+          <Text style={styles.description}>{firstData.WeatherText}</Text>
           <View style={styles.InfoContainer}></View>
 
-          <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
+          {/* <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
             firstData.main.temp
-          )}°C`}</Text>
-
+          )}°C`}</Text> */}
+          {/* 
           <Text style={styles.description}>{`Feels Like: ${Math.ceil(
             firstData.main.feels_like
-          )}°C`}</Text>
+          )}°C`}</Text> */}
 
           <Text
             style={styles.description}
           >{`Today's Max Temperature: ${Math.ceil(
-            firstData.main.temp_max
+            firstData[0].Temperature.Metric.Value
           )}°C`}</Text>
-          <Text
+          {/* <Text
             style={styles.description}
           >{`Today's Max Temperature: ${Math.ceil(
             firstData.main.temp_min
-          )}°C`}</Text>
+          )}°C`}</Text> */}
         </View>
       )}
     </View>
