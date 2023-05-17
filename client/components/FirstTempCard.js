@@ -9,7 +9,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
   console.log(`API is ${API}`);
   useEffect(() => {
     fetch(
-      `http://dataservice.accuweather.com/currentconditions/v1/56186?apikey=${API}&metric=true`
+      `http://dataservice.accuweather.com/currentconditions/v1/56186?apikey=${API}&metric=true&details=true`
     )
       .then((response) => {
         console.log(`The Then Response is ${response}`);
@@ -34,12 +34,12 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
       {firstData !== undefined && (
         <View>
           <Text style={styles.title}>Montreal</Text>
-          <Image
+          {/* <Image
             source={{ uri: weatherIcon }}
             style={styles.icon}
             alt={"WeatherIcon"}
-          ></Image>
-          <Text style={styles.description}>{firstData.WeatherText}</Text>
+          ></Image> */}
+          <Text style={styles.description}>{firstData[0].WeatherText}</Text>
           <View style={styles.InfoContainer}></View>
 
           {/* <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
@@ -50,11 +50,24 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
             firstData.main.feels_like
           )}°C`}</Text> */}
 
-          <Text
-            style={styles.description}
-          >{`Today's Max Temperature: ${Math.ceil(
+          <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
             firstData[0].Temperature.Metric.Value
           )}°C`}</Text>
+          <Text style={styles.description}>{`Max Temperature: ${Math.ceil(
+            firstData[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Value
+          )}°C`}</Text>
+          <Text style={styles.description}>{`Min Temperature: ${Math.ceil(
+            firstData[0].TemperatureSummary.Past24HourRange.Minimum.Metric.Value
+          )}°C`}</Text>
+
+          <Text style={styles.description}>{`Real Feel: ${Math.ceil(
+            firstData[0].RealFeelTemperature.Metric.Value
+          )}°C ${firstData[0].RealFeelTemperature.Metric.Phrase}`}</Text>
+
+          <Text style={styles.description}>{`Humidity: ${Math.ceil(
+            firstData[0].RelativeHumidity
+          )}%`}</Text>
+
           {/* <Text
             style={styles.description}
           >{`Today's Max Temperature: ${Math.ceil(
