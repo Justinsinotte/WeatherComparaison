@@ -27,8 +27,8 @@ export default function App() {
       /> */}
       {/* <TestButton /> */}
       <FirstTempCard firstData={firstData} setFirstData={setFirstData} />
-      {/* <SecondTempCard secondData={secondData} setSecondData={setSecondData} />
-      <StatusBar style="auto" /> */}
+      <SecondTempCard secondData={secondData} setSecondData={setSecondData} />
+      <StatusBar style="auto" />
     </View>
   );
 }

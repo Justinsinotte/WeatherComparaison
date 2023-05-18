@@ -2,15 +2,14 @@ import { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import Config from "react-native-config";
-
-const SecondTempCard = ({ firstData, setFirstData }) => {
+const SecondTempCard = ({ secondData, setSecondData }) => {
   const { ACCUAPI } = process.env;
   const { API } = process.env;
   const [weatherIcon, setWeatherIcon] = useState(null);
   console.log(`API is ${API}`);
   useEffect(() => {
     fetch(
-      `http://dataservice.accuweather.com/forecasts/v1/daily/1day/56186?apikey=${API}&metric=true`
+      `http://dataservice.accuweather.com/currentconditions/v1/45190?apikey=${API}&metric=true&details=true`
     )
       .then((response) => {
         console.log(`The Then Response is ${response}`);
@@ -22,52 +21,60 @@ const SecondTempCard = ({ firstData, setFirstData }) => {
       })
       .then((data) => {
         console.log(`Data is : ${data}`);
-        setFirstData(data);
+        setSecondData(data);
       })
       .catch((error) => {
         console.log(`Error fetching data:${error}`);
       });
   }, []);
   // console.log(weatherIcon);
-  console.log(firstData);
+  console.log(secondData);
   return (
     <View style={styles.container}>
-      {firstData !== undefined && (
+      {secondData !== undefined && (
         <View>
-          <Text
-            style={styles.title}
-          >{`${firstData.name},${firstData.sys.country}`}</Text>
-          <Image
+          <Text style={styles.title}>Arabia</Text>
+          {/* <Image
             source={{ uri: weatherIcon }}
             style={styles.icon}
             alt={"WeatherIcon"}
-          ></Image>
-          <Text style={styles.description}>
-            {firstData.weather[0].description
-              .split(" ")
-              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-              .join(" ")}
-          </Text>
+          ></Image> */}
+          <Text style={styles.description}>{secondData[0].WeatherText}</Text>
           <View style={styles.InfoContainer}></View>
 
-          <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
-            firstData.main.temp
-          )}°C`}</Text>
-
+          {/* <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
+            secondData.main.temp
+          )}°C`}</Text> */}
+          {/* 
           <Text style={styles.description}>{`Feels Like: ${Math.ceil(
-            firstData.main.feels_like
+            secondData.main.feels_like
+          )}°C`}</Text> */}
+
+          <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
+            secondData[0].Temperature.Metric.Value
+          )}°C`}</Text>
+          <Text style={styles.description}>{`Max Temperature: ${Math.ceil(
+            secondData[0].TemperatureSummary.Past24HourRange.Maximum.Metric
+              .Value
+          )}°C`}</Text>
+          <Text style={styles.description}>{`Min Temperature: ${Math.ceil(
+            secondData[0].TemperatureSummary.Past24HourRange.Minimum.Metric
+              .Value
           )}°C`}</Text>
 
-          <Text
+          <Text style={styles.description}>{`Real Feel: ${Math.ceil(
+            secondData[0].RealFeelTemperature.Metric.Value
+          )}°C ${secondData[0].RealFeelTemperature.Metric.Phrase}`}</Text>
+
+          <Text style={styles.description}>{`Humidity: ${Math.ceil(
+            secondData[0].RelativeHumidity
+          )}%`}</Text>
+
+          {/* <Text
             style={styles.description}
           >{`Today's Max Temperature: ${Math.ceil(
-            firstData.main.temp_max
-          )}°C`}</Text>
-          <Text
-            style={styles.description}
-          >{`Today's Max Temperature: ${Math.ceil(
-            firstData.main.temp_min
-          )}°C`}</Text>
+            secondData.main.temp_min
+          )}°C`}</Text> */}
         </View>
       )}
     </View>

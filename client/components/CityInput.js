@@ -10,57 +10,62 @@ import {
 import styled from "styled-components/native";
 import Autocomplete from "react-native-autocomplete-input";
 
-const CityInput = ({ inputText, setInputText, onSelectCity }) => {
-  const [cities, setCities] = useState([]);
-  const [query, setQuery] = useState("");
+const CityInput = ({}) => {
   const { API } = process.env;
 
-  useEffect(() => {
-    fetch("http://10.0.0.102:3001/api/citiesGet")
-      .then((response) => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          throw new Error("Network response was not ok");
-        }
-      })
-      .then((data) => {})
-      .catch((error) => {
-        console.log("Error fetching data:");
-      });
-  }, [query]);
-  const handleInputChange = (text) => {
-    setQuery(text);
-  };
-
-  const handleSelectCity = (item) => {
-    onSelectCity(item);
-    setInputText(item.local_names?.en || item.name);
-  };
-
-  const renderItem = ({ item }) => {
-    return (
-      <TouchableOpacity onPress={() => handleSelectCity(item)}>
-        <Text>{item.local_names?.en || item.name}</Text>
-      </TouchableOpacity>
-    );
-  };
-  // console.log(cities);
-  return (
-    <Autocomplete
-      data={cities}
-      renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
-      defaultValue={inputText}
-      onChangeText={handleInputChange}
-      placeholder="Enter city name"
-      flatListProps={{ renderItem }}
-      containerStyle={styles.container}
-      inputContainerStyle={styles.inputContainer}
-      listStyle={styles.list}
-    />
-  );
+  return <TextInput></TextInput>;
 };
+// const CityInput = ({ inputText, setInputText, onSelectCity }) => {
+//   const [cities, setCities] = useState([]);
+//   const [query, setQuery] = useState("");
+//   const { API } = process.env;
+
+//   useEffect(() => {
+//     fetch("http://10.0.0.102:3001/api/citiesGet")
+//       .then((response) => {
+//         if (response.status === 200) {
+//           return response.json();
+//         } else {
+//           throw new Error("Network response was not ok");
+//         }
+//       })
+//       .then((data) => {})
+//       .catch((error) => {
+//         console.log("Error fetching data:");
+//       });
+//   }, [query]);
+//   const handleInputChange = (text) => {
+//     setQuery(text);
+//   };
+
+//   const handleSelectCity = (item) => {
+//     onSelectCity(item);
+//     setInputText(item.local_names?.en || item.name);
+//   };
+
+//   const renderItem = ({ item }) => {
+//     return (
+//       <TouchableOpacity onPress={() => handleSelectCity(item)}>
+//         <Text>{item.local_names?.en || item.name}</Text>
+//       </TouchableOpacity>
+//     );
+//   };
+//   // console.log(cities);
+//   return (
+//     <Autocomplete
+//       data={cities}
+//       renderItem={renderItem}
+//       keyExtractor={(item) => item.id.toString()}
+//       defaultValue={inputText}
+//       onChangeText={handleInputChange}
+//       placeholder="Enter city name"
+//       flatListProps={{ renderItem }}
+//       containerStyle={styles.container}
+//       inputContainerStyle={styles.inputContainer}
+//       listStyle={styles.list}
+//     />
+//   );
+// };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
