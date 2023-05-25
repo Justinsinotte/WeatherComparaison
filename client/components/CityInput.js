@@ -13,7 +13,7 @@ import Autocomplete from "react-native-autocomplete-input";
 const CityInput = ({}) => {
   const { API } = process.env;
 
-  return <TextInput>GET CITY</TextInput>;
+  return <TextInput>WELP...</TextInput>;
 };
 // const CityInput = ({ inputText, setInputText, onSelectCity }) => {
 //   const [cities, setCities] = useState([]);
