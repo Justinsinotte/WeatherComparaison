@@ -2,14 +2,15 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
 import FirstTempCard from "./components/FirstTempCard.js";
 import SecondTempCard from "./components/SecondTempCard.js";
-import CityInput from "./components/CityInput.js";
+import CityInputFirst from "./components/CityInputFirst.js";
 import TestButton from "./components/TestButton.js";
 import { useState, useEffect } from "react";
 
 export default function App() {
   const [firstData, setFirstData] = useState();
   const [secondData, setSecondData] = useState();
-  const [inputText, setInputText] = useState();
+  const [inputFirstText, setFirstInputText] = useState();
+  const [inputSecondText, setSecondInputText] = useState();
   const [city, setCity] = useState();
 
   const handleCitySelect = (cityName) => {
@@ -20,11 +21,11 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {/* <CityInput
-        inputText={inputSecond
-        setInputText={setInputText}
+      <CityInputFirst
+        inputText={inputFirstText}
+        setInputText={setFirstInputText}
         onSelectCity={handleCitySelect}
-      /> */}
+      />
       {/* <TestButton /> */}
       <FirstTempCard firstData={firstData} setFirstData={setFirstData} />
       <SecondTempCard secondData={secondData} setSecondData={setSecondData} />
