@@ -9,21 +9,21 @@ import { useState, useEffect } from "react";
 export default function App() {
   const [firstData, setFirstData] = useState();
   const [secondData, setSecondData] = useState();
-  const [inputFirstText, setFirstInputText] = useState();
+  const [firstInputText, setFirstInputText] = useState("");
   const [inputSecondText, setSecondInputText] = useState();
   const [city, setCity] = useState();
 
   const handleCitySelect = (cityName) => {
-    console.log(`setCity is ${cityName}`);
+    // console.log(`setCity is ${cityName}`);
     setCity(cityName);
-    console.log(`city is ${city}`);
+    // console.log(`city is ${city}`);
   };
-
+  console.log(`firstData is ${firstData}`);
   return (
     <View style={styles.container}>
       <CityInputFirst
-        inputText={inputFirstText}
-        setInputText={setFirstInputText}
+        firstInputText={firstInputText}
+        setFirstInputText={setFirstInputText}
         onSelectCity={handleCitySelect}
       />
       {/* <TestButton /> */}

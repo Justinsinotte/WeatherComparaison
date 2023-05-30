@@ -3,109 +3,97 @@ import {
   View,
   TextInput,
   Button,
-  TouchableOpacity,
-  Text,
   StyleSheet,
+  FlatList,
+  Text,
+  TouchableOpacity,
 } from "react-native";
-import styled from "styled-components/native";
-import Autocomplete from "react-native-autocomplete-input";
 
-const CityInputFirst = ({ inputText, setInputText, onSelectCity }) => {
+const CityInputFirst = ({
+  firstInputText,
+  setFirstInputText,
+  firstData,
+  setFirstData,
+}) => {
   const { API } = process.env;
-  const [cities, setCities] = useState([]);
   const [query, setQuery] = useState("");
+  console.log(`Query is : ${query}`);
 
+  useEffect(() => {
+    let isMounted = true; // Flag to track if the component is mounted
+
+    {
+      fetch(
+        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API}&q=${query}&offset=5`
+      )
+        .then((response) => {
+          if (response.status === 200) {
+            return response.json();
+          } else {
+            throw new Error("Network response was not ok");
+          }
+        })
+        .then((data) => {
+          if (isMounted) {
+            setFirstInputText(data); // Pass the fetched data to the callback function
+          }
+        })
+        .catch((error) => {
+          console.log("Error fetching data:", error);
+        });
+    }
+
+    return () => {
+      isMounted = false; // Cleanup function to update the mounted flag
+    };
+  }, [query]); // Only trigger the effect when the query changes
+  const handleInputChange = (text) => {
+    setQuery(text);
+  };
+
+  const handleItemPress = (item) => {
+    const selectedKey = item.Key;
+    setQuery(selectedKey);
+    setFirstData(selectedKey);
+  };
+
+  const renderCityItem = ({ item }) => (
+    <TouchableOpacity onPress={() => handleItemPress(item)}>
+      <View>
+        <Text>{item.LocalizedName}</Text>
+        <Text>{item.AdministrativeArea.ID}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+  // console.log(`This is first city ${firstInputText[0].Key}`);
   return (
-    <TextInput
-      style={{
-        width: 120,
-        height: 40,
-        borderColor: "gray",
-        borderWidth: 1,
-        textAlign: "center",
-      }}
-      placeholder="Enter City Name"
-    ></TextInput>
+    <View style={styles.container}>
+      <TextInput
+        style={styles.inputContainer}
+        placeholder="Enter City Name"
+        value={query}
+        onChangeText={handleInputChange}
+      />
+      <FlatList
+        data={firstInputText}
+        keyExtractor={(item) => item.Key}
+        renderItem={renderCityItem}
+      />
+    </View>
   );
 };
-// const CityInput = ({ inputText, setInputText, onSelectCity }) => {
-//   const [cities, setCities] = useState([]);
-//   const [query, setQuery] = useState("");
-//   const { API } = process.env;
 
-//   useEffect(() => {
-//     fetch("http://10.0.0.102:3001/api/citiesGet")
-//       .then((response) => {
-//         if (response.status === 200) {
-//           return response.json();
-//         } else {
-//           throw new Error("Network response was not ok");
-//         }
-//       })
-//       .then((data) => {})
-//       .catch((error) => {
-//         console.log("Error fetching data:");
-//       });
-//   }, [query]);
-//   const handleInputChange = (text) => {
-//     setQuery(text);
-//   };
-
-//   const handleSelectCity = (item) => {
-//     onSelectCity(item);
-//     setInputText(item.local_names?.en || item.name);
-//   };
-
-//   const renderItem = ({ item }) => {
-//     return (
-//       <TouchableOpacity onPress={() => handleSelectCity(item)}>
-//         <Text>{item.local_names?.en || item.name}</Text>
-//       </TouchableOpacity>
-//     );
-//   };
-//   // console.log(cities);
-//   return (
-//     <Autocomplete
-//       data={cities}
-//       renderItem={renderItem}
-//       keyExtractor={(item) => item.id.toString()}
-//       defaultValue={inputText}
-//       onChangeText={handleInputChange}
-//       placeholder="Enter city name"
-//       flatListProps={{ renderItem }}
-//       containerStyle={styles.container}
-//       inputContainerStyle={styles.inputContainer}
-//       listStyle={styles.list}
-//     />
-//   );
-// };
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
-    borderWidth: 0,
   },
   inputContainer: {
-    borderWidth: 1,
+    width: 120,
+    height: 40,
     borderColor: "gray",
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    marginHorizontal: 10,
-    marginBottom: 10,
-  },
-  list: {
     borderWidth: 1,
-    borderColor: "gray",
-    borderRadius: 10,
-    marginHorizontal: 10,
-    maxHeight: 200,
-  },
-  itemContainer: {
-    paddingVertical: 10,
-    paddingHorizontal: 10,
-  },
-  itemText: {
-    fontSize: 16,
+    textAlign: "center",
   },
 });
 

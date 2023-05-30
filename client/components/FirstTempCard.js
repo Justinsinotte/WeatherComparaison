@@ -12,7 +12,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
       `http://dataservice.accuweather.com/currentconditions/v1/56186?apikey=${API}&metric=true&details=true`
     )
       .then((response) => {
-        console.log(`The Then Response is ${response}`);
+        // console.log(`The Then Response is ${response}`);
         if (response.status === 200) {
           return response.json();
         } else {
@@ -20,7 +20,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
         }
       })
       .then((data) => {
-        console.log(`Data is : ${data}`);
+        // console.log(`Data is : ${data}`);
         setFirstData(data);
       })
       .catch((error) => {
@@ -28,7 +28,7 @@ const FirstTempCard = ({ firstData, setFirstData }) => {
       });
   }, []);
   // console.log(weatherIcon);
-  console.log(firstData);
+  // console.log(firstData);
   return (
     <View style={styles.container}>
       {firstData !== undefined && (
