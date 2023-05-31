@@ -2,51 +2,48 @@ import React, { useState, useEffect } from "react";
 import {
   View,
   TextInput,
-  Button,
-  StyleSheet,
   FlatList,
   Text,
   TouchableOpacity,
+  StyleSheet,
 } from "react-native";
 
 const CityInputFirst = ({
   firstInputText,
   setFirstInputText,
-  firstData,
   setFirstData,
+  onSelectCity,
 }) => {
   const { API } = process.env;
   const [query, setQuery] = useState("");
-  console.log(`Query is : ${query}`);
 
   useEffect(() => {
-    let isMounted = true; // Flag to track if the component is mounted
+    let isMounted = true;
 
-    {
-      fetch(
-        `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API}&q=${query}&offset=5`
-      )
-        .then((response) => {
-          if (response.status === 200) {
-            return response.json();
-          } else {
-            throw new Error("Network response was not ok");
-          }
-        })
-        .then((data) => {
-          if (isMounted) {
-            setFirstInputText(data); // Pass the fetched data to the callback function
-          }
-        })
-        .catch((error) => {
-          console.log("Error fetching data:", error);
-        });
-    }
+    fetch(
+      `http://dataservice.accuweather.com/locations/v1/cities/search?apikey=${API}&q=${query}&offset=5`
+    )
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          throw new Error("Network response was not ok");
+        }
+      })
+      .then((data) => {
+        if (isMounted) {
+          setFirstInputText(data);
+        }
+      })
+      .catch((error) => {
+        console.log("Error fetching data:", error);
+      });
 
     return () => {
-      isMounted = false; // Cleanup function to update the mounted flag
+      isMounted = false;
     };
-  }, [query]); // Only trigger the effect when the query changes
+  }, [query]);
+
   const handleInputChange = (text) => {
     setQuery(text);
   };
@@ -54,7 +51,8 @@ const CityInputFirst = ({
   const handleItemPress = (item) => {
     const selectedKey = item.Key;
     setQuery(selectedKey);
-    setFirstData(selectedKey);
+    onSelectCity(item.LocalizedName); // Pass the selected city name to the parent component
+    setFirstData(selectedKey); // Reset the first data
   };
 
   const renderCityItem = ({ item }) => (
