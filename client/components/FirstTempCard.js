@@ -48,9 +48,9 @@ const FirstTempCard = ({ firstData }) => {
           <Text style={styles.description}>{firstData[0].WeatherText}</Text>
           <View style={styles.InfoContainer}></View>
           <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
-            firstData[0].Temperature.Metric.Value
+            firstData[0].Temperature
           )}°C`}</Text>
-          <Text style={styles.description}>{`Max Temperature: ${Math.ceil(
+          {/* <Text style={styles.description}>{`Max Temperature: ${Math.ceil(
             firstData[0].TemperatureSummary.Past24HourRange.Maximum.Metric.Value
           )}°C`}</Text>
           <Text style={styles.description}>{`Min Temperature: ${Math.ceil(
@@ -61,7 +61,7 @@ const FirstTempCard = ({ firstData }) => {
           )}°C ${firstData[0].RealFeelTemperature.Metric.Phrase}`}</Text>
           <Text style={styles.description}>{`Humidity: ${Math.ceil(
             firstData[0].RelativeHumidity
-          )}%`}</Text>
+          )}%`}</Text> */}
         </View>
       )}
     </View>
