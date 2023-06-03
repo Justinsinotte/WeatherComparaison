@@ -12,7 +12,8 @@ const CityInputFirst = ({
   firstInputText,
   setFirstInputText,
   setFirstData,
-  onSelectCity,
+  firstOnSelectCity,
+  setFirstOnSelectCity,
 }) => {
   const { API } = process.env;
   const [query, setQuery] = useState("");
@@ -51,7 +52,7 @@ const CityInputFirst = ({
   const handleItemPress = (item) => {
     const selectedKey = item.Key;
     setQuery(selectedKey);
-    onSelectCity(item.LocalizedName); // Pass the selected city name to the parent component
+    setFirstOnSelectCity(item.LocalizedName); // Pass the selected city name to the parent component
     setFirstData(selectedKey); // Reset the first data
   };
 

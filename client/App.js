@@ -10,8 +10,10 @@ export default function App() {
   const [secondData, setSecondData] = useState(null);
   const [firstInputText, setFirstInputText] = useState("");
   const [inputSecondText, setSecondInputText] = useState("");
+  const [firstOnSelectCity, setFirstOnSelectCity] = useState("");
   const [city, setCity] = useState("");
 
+  console.log(`App.js firstOneSelectCity is: ${firstOnSelectCity}`);
   const handleCitySelect = (cityName) => {
     setCity(cityName);
   };
@@ -23,8 +25,12 @@ export default function App() {
         setFirstInputText={setFirstInputText}
         setFirstData={setFirstData}
         onSelectCity={handleCitySelect}
+        setFirstOnSelectCity={setFirstOnSelectCity}
       />
-      <FirstTempCard firstData={firstData} />
+      <FirstTempCard
+        firstData={firstData}
+        firstOnSelectCity={firstOnSelectCity}
+      />
       {/* <SecondTempCard secondData={secondData} setSecondData={setSecondData} /> */}
       <StatusBar style="auto" />
     </View>

@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import Config from "react-native-config";
 
-const FirstTempCard = ({ firstData }) => {
+const FirstTempCard = ({ firstData, firstOnSelectCity }) => {
   const { API } = process.env;
   const [weatherIcon, setWeatherIcon] = useState(null);
-  console.log(`API is ${API}`);
+  console.log(`FirstTempCard API is ${API}`);
+  console.log(`FirstTempCard firstOnCitySelect is ${firstOnSelectCity}`);
+  console.log(`FirstTempCard firstData is : ${firstData}`);
 
   useEffect(() => {
     if (!firstData) {
@@ -23,12 +25,15 @@ const FirstTempCard = ({ firstData }) => {
         if (response.status === 200) {
           return response.json();
         } else {
-          throw new Error("Network response was not ok");
+          throw new Error("Network response was not ok/FirstTempCard");
         }
       })
       .then((data) => {
         setWeatherIcon(data); // Assuming `data` contains the weather icon URL
-        console.log(weatherIcon);
+        console.log(
+          "FirstTempCard setWeatherIcon is:",
+          JSON.stringify(setWeatherIcon)
+        );
       })
       .catch((error) => {
         console.log(`Error fetching data: ${error}`);
