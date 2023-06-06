@@ -31,7 +31,6 @@ export default function App() {
         firstData={firstData}
         firstOnSelectCity={firstOnSelectCity}
       />
-      {/* <SecondTempCard secondData={secondData} setSecondData={setSecondData} /> */}
       <StatusBar style="auto" />
     </View>
   );
@@ -39,9 +38,22 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 50, // Adjust the top padding as needed
+    borderColor: "brown",
+    borderWidth: 1,
+  },
+  cityInput: {
+    marginBottom: 10, // Adjust the margin as needed
+    borderColor: "blue",
+    borderWidth: 1,
+  },
+  firstTempCard: {
+    marginTop: 10, // Adjust the margin as needed
+    borderColor: "pink",
+    borderWidth: 1,
   },
 });
