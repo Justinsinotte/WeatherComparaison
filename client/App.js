@@ -42,17 +42,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    paddingTop: 50, // Adjust the top padding as needed
+    height: 100, // Adjust the top padding as needed
     borderColor: "brown",
-    borderWidth: 1,
+    borderWidth: 4,
   },
   cityInput: {
     marginBottom: 10, // Adjust the margin as needed
     borderColor: "blue",
-    borderWidth: 1,
+    borderWidth: 4,
   },
   firstTempCard: {
-    marginTop: 10, // Adjust the margin as needed
+    marginTop: 100, // Adjust the margin as needed
     borderColor: "pink",
     borderWidth: 1,
   },
