@@ -77,6 +77,7 @@ const CityInputFirst = ({
         data={firstInputText}
         keyExtractor={(item) => item.Key}
         renderItem={renderCityItem}
+        contentContainerStyle={styles.listContent}
       />
     </View>
   );
@@ -84,7 +85,9 @@ const CityInputFirst = ({
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    borderWidth: 3,
+    borderColor: "pink",
+    flex: 0.2,
     backgroundColor: "white",
   },
   inputContainer: {
@@ -93,6 +96,9 @@ const styles = StyleSheet.create({
     borderColor: "gray",
     borderWidth: 1,
     textAlign: "center",
+  },
+  listContent: {
+    flexGrow: 1,
   },
 });
 

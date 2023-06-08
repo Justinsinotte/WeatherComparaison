@@ -79,6 +79,8 @@ const FirstTempCard = ({ firstData, firstOnSelectCity }) => {
 const styles = StyleSheet.create({
   container: {
     // styles
+    borderWidth: 1,
+    borderColor: "brown",
   },
   title: {
     // styles

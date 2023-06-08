@@ -20,17 +20,21 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <CityInputFirst
-        firstInputText={firstInputText}
-        setFirstInputText={setFirstInputText}
-        setFirstData={setFirstData}
-        onSelectCity={handleCitySelect}
-        setFirstOnSelectCity={setFirstOnSelectCity}
-      />
-      <FirstTempCard
-        firstData={firstData}
-        firstOnSelectCity={firstOnSelectCity}
-      />
+      <View style={styles.innerContainerFirst}>
+        <CityInputFirst
+          style={styles.cityInput} // Use the style prop instead of styles
+          firstInputText={firstInputText}
+          setFirstInputText={setFirstInputText}
+          setFirstData={setFirstData}
+          onSelectCity={handleCitySelect}
+          setFirstOnSelectCity={setFirstOnSelectCity}
+        />
+        <FirstTempCard
+          style={styles.firstTempCard} // Use the style prop instead of styles
+          firstData={firstData}
+          firstOnSelectCity={firstOnSelectCity}
+        />
+      </View>
       <StatusBar style="auto" />
     </View>
   );
@@ -38,22 +42,28 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
-    height: 100, // Adjust the top padding as needed
-    borderColor: "brown",
-    borderWidth: 4,
+    justifyContent: "flex-start",
+    borderWidth: 5, // Add border to the container
+    borderColor: "pink", // Set border color to pink
+  },
+  innerContainerFirst: {
+    flex: 1,
+    width: "50%",
+    padding: 20,
+    alignItems: "center",
+    justifyContent: "space-evenly",
+    borderWidth: 3,
+    borderColor: "red",
   },
   cityInput: {
-    marginBottom: 10, // Adjust the margin as needed
+    borderWidth: 3,
     borderColor: "blue",
-    borderWidth: 4,
   },
   firstTempCard: {
-    marginTop: 100, // Adjust the margin as needed
-    borderColor: "pink",
-    borderWidth: 1,
+    borderWidth: 3,
+    borderColor: "brown",
   },
 });
