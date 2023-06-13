@@ -5,7 +5,7 @@ import FirstTempCard from "./components/FirstTempCard";
 import SecondTempCard from "./components/SecondTempCard";
 import CityInputFirst from "./components/CityInputFirst";
 import CityInputSecond from "./components/CityInputSecond";
-
+import Comparison from "./components/Comparison";
 export default function App() {
   const [firstData, setFirstData] = useState(null);
   const [secondData, setSecondData] = useState(null);
@@ -27,37 +27,39 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.innerContainerFirst}>
-        <CityInputFirst
-          style={styles.cityInput} // Use the style prop instead of styles
-          firstInputText={firstInputText}
-          setFirstInputText={setFirstInputText}
-          setFirstData={setFirstData}
-          onSelectCity={handleCitySelectFirst}
-          setFirstOnSelectCity={setFirstOnSelectCity}
-        />
-        <FirstTempCard
-          style={styles.firstTempCard} // Use the style prop instead of styles
-          firstData={firstData}
-          firstOnSelectCity={firstOnSelectCity}
-        />
+      <View style={styles.tempCards}>
+        <View style={styles.innerContainerFirst}>
+          <CityInputFirst
+            style={styles.cityInput} // Use the style prop instead of styles
+            firstInputText={firstInputText}
+            setFirstInputText={setFirstInputText}
+            setFirstData={setFirstData}
+            onSelectCity={handleCitySelectFirst}
+            setFirstOnSelectCity={setFirstOnSelectCity}
+          />
+          <FirstTempCard
+            style={styles.firstTempCard} // Use the style prop instead of styles
+            firstData={firstData}
+            firstOnSelectCity={firstOnSelectCity}
+          />
+        </View>
+        <View style={styles.innerContainerSecond}>
+          <CityInputSecond
+            style={styles.cityInput} // Use the style prop instead of styles
+            secondInputText={secondInputText}
+            setSecondInputText={setSecondInputText}
+            setSecondData={setSecondData}
+            onSelectCity={handleCitySelectSecond}
+            setSecondOnSelectCity={setSecondOnSelectCity}
+          />
+          <SecondTempCard
+            style={styles.secondTempCard} // Use the style prop instead of styles
+            secondData={secondData}
+            secondOnSelectCity={secondOnSelectCity}
+          />
+        </View>
       </View>
-      <View style={styles.innerContainerSecond}>
-        <CityInputSecond
-          style={styles.cityInput} // Use the style prop instead of styles
-          secondInputText={secondInputText}
-          setSecondInputText={setSecondInputText}
-          setSecondData={setSecondData}
-          onSelectCity={handleCitySelectSecond}
-          setSecondOnSelectCity={setSecondOnSelectCity}
-        />
-        <SecondTempCard
-          style={styles.secondTempCard} // Use the style prop instead of styles
-          secondData={secondData}
-          secondOnSelectCity={secondOnSelectCity}
-        />
-      </View>
-
+      <Comparison></Comparison>
       {/* <StatusBar style="auto" /> */}
     </View>
   );
@@ -73,12 +75,17 @@ const styles = StyleSheet.create({
     borderWidth: 5, // Add border to the container
     borderColor: "pink", // Set border color to pink
   },
+  tempCards: {
+    display: "flex",
+    flexDirection: "row",
+    height: "60%",
+  },
   innerContainerFirst: {
     flex: 1,
     width: "50%",
     padding: 20,
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     borderWidth: 3,
     borderColor: "red",
   },
@@ -95,7 +102,7 @@ const styles = StyleSheet.create({
     width: "50%",
     padding: 20,
     alignItems: "center",
-    justifyContent: "space-evenly",
+    justifyContent: "space-between",
     borderWidth: 3,
     borderColor: "red",
   },
