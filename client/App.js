@@ -59,7 +59,7 @@ export default function App() {
           />
         </View>
       </View>
-      <Comparison></Comparison>
+      <Comparison firstData={firstData} secondData={secondData}></Comparison>
       {/* <StatusBar style="auto" /> */}
     </View>
   );
