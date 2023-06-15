@@ -1,16 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 
-const Comparison = ({ firstData, secondData }) => {
+const Comparison = ({
+  firstWeatherFetch,
+  secondWeatherFetch,
+  secondOnSelectCity,
+  firstOnSelectCity,
+}) => {
   console.log("Comparison Mounted");
 
-  if (firstData) {
-    return console.log(firstData);
-  }
+  useEffect(() => {
+    if (firstWeatherFetch) {
+      return console.log(firstWeatherFetch[0]);
+    }
 
-  if (!firstData) {
-    return console.log(`firstData not found`);
-  }
+    if (!firstWeatherFetch) {
+      return console.log(`firstWeatherFetch not found`);
+    }
+  }, [firstWeatherFetch, secondWeatherFetch]);
 
   return (
     <View>

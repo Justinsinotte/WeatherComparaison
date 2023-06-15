@@ -13,8 +13,11 @@ export default function App() {
   const [secondInputText, setSecondInputText] = useState("");
   const [firstOnSelectCity, setFirstOnSelectCity] = useState("");
   const [secondOnSelectCity, setSecondOnSelectCity] = useState("");
-  const [cityFirst, setCityFirst] = useState("");
-  const [citySecond, setCitySecond] = useState("");
+  const [firstWeatherFetch, setFirstWeatherFetch] = useState(null);
+  const [secondWeatherFetch, setSecondWeatherFetch] = useState(null);
+
+  // const [cityFirst, setCityFirst] = useState("");
+  // const [citySecond, setCitySecond] = useState("");
 
   console.log(`App.js firstOneSelectCity is: ${firstOnSelectCity}`);
   const handleCitySelectFirst = (cityName) => {
@@ -41,6 +44,8 @@ export default function App() {
             style={styles.firstTempCard} // Use the style prop instead of styles
             firstData={firstData}
             firstOnSelectCity={firstOnSelectCity}
+            firstWeatherFetch={firstWeatherFetch}
+            setFirstWeatherFetch={setFirstWeatherFetch}
           />
         </View>
         <View style={styles.innerContainerSecond}>
@@ -56,10 +61,17 @@ export default function App() {
             style={styles.secondTempCard} // Use the style prop instead of styles
             secondData={secondData}
             secondOnSelectCity={secondOnSelectCity}
+            secondWeatherFetch={secondWeatherFetch}
+            setSecondWeatherFetch={setSecondWeatherFetch}
           />
         </View>
       </View>
-      <Comparison firstData={firstData} secondData={secondData}></Comparison>
+      <Comparison
+        firstWeatherFetch={firstWeatherFetch}
+        secondWeatherFetch={secondWeatherFetch}
+        firstOnSelectCity={firstOnSelectCity}
+        secondOnSelectCity={secondOnSelectCity}
+      ></Comparison>
       {/* <StatusBar style="auto" /> */}
     </View>
   );

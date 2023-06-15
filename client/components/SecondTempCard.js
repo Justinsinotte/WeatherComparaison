@@ -3,9 +3,13 @@ import { StyleSheet, Text, View, Button, Image } from "react-native";
 import { Card, Icon } from "@rneui/themed";
 import Config from "react-native-config";
 
-const SecondTempCard = ({ secondData, secondOnSelectCity }) => {
+const SecondTempCard = ({
+  secondData,
+  secondOnSelectCity,
+  secondWeatherFetch,
+  setSecondWeatherFetch,
+}) => {
   const { API } = process.env;
-  const [secondWeatherFetch, setSecondWeatherFetch] = useState(null);
   console.log(`SecondTempCard API is ${API}`);
   console.log(`SecondTempCard secondOnCitySelect is ${secondOnSelectCity}`);
   console.log(`SecondTempCard secondData is : ${secondData}`);
