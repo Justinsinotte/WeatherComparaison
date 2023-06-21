@@ -11,90 +11,32 @@ const Comparison = ({
 
   useEffect(() => {
     if (firstWeatherFetch) {
-      return console.log(firstWeatherFetch[0]);
-    }
-
-    if (!firstWeatherFetch) {
-      return console.log(`firstWeatherFetch not found`);
+      console.log(firstWeatherFetch[0]);
+    } else {
+      console.log("firstWeatherFetch not found");
     }
   }, [firstWeatherFetch, secondWeatherFetch]);
 
   return (
     <View style={styles.container1}>
-      {firstWeatherFetch && (
-        <View>
-          <Text style={styles.title}>{firstOnSelectCity}</Text>
-          {/* <Image
-          source={{ uri: firstWeatherFetch }}
-          style={styles.icon}
-          alt={"firstWeatherFetch"}
-        /> */}
-          <Text style={styles.description}>
-            {firstWeatherFetch.WeatherText}
-          </Text>
-          <View style={styles.InfoContainer}></View>
-          <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
-            firstWeatherFetch[0].Temperature.Metric.Value
-          )}°C`}</Text>
-          <Text style={styles.description}>{`Max Temperature: ${Math.ceil(
-            firstWeatherFetch[0].TemperatureSummary.Past24HourRange.Maximum
-              .Metric.Value
-          )}°C`}</Text>
-          <Text style={styles.description}>{`Min Temperature: ${Math.ceil(
-            firstWeatherFetch[0].TemperatureSummary.Past24HourRange.Minimum
-              .Metric.Value
-          )}°C`}</Text>
-          <Text style={styles.description}>{`Real Feel: ${Math.ceil(
-            firstWeatherFetch[0].RealFeelTemperature.Metric.Value
-          )}°C ${
-            firstWeatherFetch[0].RealFeelTemperature.Metric.Phrase
-          }`}</Text>
-          <Text style={styles.description}>{`Humidity: ${Math.ceil(
-            firstWeatherFetch[0].RelativeHumidity
-          )}%`}</Text>
-        </View>
-      )}
-      <View style={styles.container2}>
-        {secondWeatherFetch && (
+      {secondWeatherFetch &&
+        firstWeatherFetch &&
+        (secondWeatherFetch[0].Temperature.Metric.Value >
+        firstWeatherFetch[0].Temperature.Metric.Value ? (
           <View>
-            <Text style={styles.title}>{secondOnSelectCity}</Text>
-            {/* <Image
-            source={{ uri: secondWeatherFetch }}
-            style={styles.icon}
-            alt={"secondWeatherFetch"}
-          /> */}
-            <Text style={styles.description}>
-              {secondWeatherFetch.WeatherText}
-            </Text>
-            <View style={styles.InfoContainer}></View>
-            <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
-              secondWeatherFetch[0].Temperature.Metric.Value
-            )}°C`}</Text>
-            <Text style={styles.description}>{`Max Temperature: ${Math.ceil(
-              secondWeatherFetch[0].TemperatureSummary.Past24HourRange.Maximum
-                .Metric.Value
-            )}°C`}</Text>
-            <Text style={styles.description}>{`Min Temperature: ${Math.ceil(
-              secondWeatherFetch[0].TemperatureSummary.Past24HourRange.Minimum
-                .Metric.Value
-            )}°C`}</Text>
-            <Text style={styles.description}>{`Real Feel: ${Math.ceil(
-              secondWeatherFetch[0].RealFeelTemperature.Metric.Value
-            )}°C ${
-              secondWeatherFetch[0].RealFeelTemperature.Metric.Phrase
-            }`}</Text>
-            <Text style={styles.description}>{`Humidity: ${Math.ceil(
-              secondWeatherFetch[0].RelativeHumidity
-            )}%`}</Text>
+            <Text>Second City is Hotter than First City</Text>
           </View>
-        )}
-      </View>
+        ) : (
+          <View>
+            <Text>First City is Hotter than Second City</Text>
+          </View>
+        ))}
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container1: {
-    // styles
     borderWidth: 1,
     borderColor: "brown",
   },
@@ -103,16 +45,16 @@ const styles = StyleSheet.create({
     borderColor: "pink",
   },
   title: {
-    // styles
+    // Add your styles
   },
   icon: {
-    // styles
+    // Add your styles
   },
   description: {
-    // styles
+    // Add your styles
   },
   InfoContainer: {
-    // styles
+    // Add your styles
   },
 });
 
