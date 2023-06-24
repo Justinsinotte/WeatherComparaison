@@ -10,9 +10,9 @@ const SecondTempCard = ({
   setSecondWeatherFetch,
 }) => {
   const { API } = process.env;
-  console.log(`SecondTempCard API is ${API}`);
-  console.log(`SecondTempCard secondOnCitySelect is ${secondOnSelectCity}`);
-  console.log(`SecondTempCard secondData is : ${secondData}`);
+  // console.log(`SecondTempCard API is ${API}`);
+  // console.log(`SecondTempCard secondOnCitySelect is ${secondOnSelectCity}`);
+  // console.log(`SecondTempCard secondData is : ${secondData}`);
 
   useEffect(() => {
     if (!secondData) {
@@ -20,7 +20,7 @@ const SecondTempCard = ({
       return;
     }
 
-    console.log("SecondTempCard secondData is:", secondData);
+    // console.log("SecondTempCard secondData is:", secondData);
 
     fetch(
       `http://dataservice.accuweather.com/currentconditions/v1/${secondData}?apikey=${API}&metric=true&details=true`
@@ -35,10 +35,10 @@ const SecondTempCard = ({
       .then((data) => {
         // console.log(data);
         setSecondWeatherFetch(data); // Assuming `data` contains the weather icon URL
-        console.log(
-          "SecondTempCard secondWeatherFetch is:",
-          secondWeatherFetch
-        );
+        // console.log(
+        //   "SecondTempCard secondWeatherFetch is:",
+        //   secondWeatherFetch
+        // );
       })
       .catch((error) => {
         console.log(`Error fetching data: ${error}`);

@@ -11,9 +11,9 @@ const FirstTempCard = ({
 }) => {
   const { API } = process.env;
 
-  console.log(`FirstTempCard API is ${API}`);
-  console.log(`FirstTempCard firstOnCitySelect is ${firstOnSelectCity}`);
-  console.log(`FirstTempCard firstData is : ${firstData}`);
+  // console.log(`FirstTempCard API is ${API}`);
+  // console.log(`FirstTempCard firstOnCitySelect is ${firstOnSelectCity}`);
+  // console.log(`FirstTempCard firstData is : ${firstData}`);
 
   useEffect(() => {
     if (!firstData) {
@@ -21,7 +21,7 @@ const FirstTempCard = ({
       return;
     }
 
-    console.log("FirstTempCard firstData is:", firstData);
+    // console.log("FirstTempCard firstData is:", firstData);
 
     fetch(
       `http://dataservice.accuweather.com/currentconditions/v1/${firstData}?apikey=${API}&metric=true&details=true`
@@ -36,7 +36,7 @@ const FirstTempCard = ({
       .then((data) => {
         // console.log(data);
         setFirstWeatherFetch(data); // Assuming `data` contains the weather icon URL
-        console.log("FirstTempCard firstWeatherFetch is:", firstWeatherFetch);
+        // console.log("FirstTempCard firstWeatherFetch is:", firstWeatherFetch);
       })
       .catch((error) => {
         console.log(`Error fetching data: ${error}`);

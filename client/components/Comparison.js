@@ -11,7 +11,7 @@ const Comparison = ({
 
   useEffect(() => {
     if (firstWeatherFetch) {
-      console.log(firstWeatherFetch[0]);
+      // console.log(firstWeatherFetch[0]);
     } else {
       console.log("firstWeatherFetch not found");
     }
@@ -24,11 +24,21 @@ const Comparison = ({
         (secondWeatherFetch[0].Temperature.Metric.Value >
         firstWeatherFetch[0].Temperature.Metric.Value ? (
           <View>
-            <Text>Second City is Hotter than First City</Text>
+            <Text>
+              {`${secondOnSelectCity} is hotter than by ${
+                Math.ceil(secondWeatherFetch[0].Temperature.Metric.Value) -
+                Math.ceil(firstWeatherFetch[0].Temperature.Metric.Value)
+              }°Cthan ${firstOnSelectCity}`}
+            </Text>
           </View>
         ) : (
           <View>
-            <Text>First City is Hotter than Second City</Text>
+            <Text>
+              {`${firstOnSelectCity} is hotter by ${
+                Math.ceil(firstWeatherFetch[0].Temperature.Metric.Value) -
+                Math.ceil(secondWeatherFetch[0].Temperature.Metric.Value)
+              }°C than ${secondOnSelectCity}`}
+            </Text>
           </View>
         ))}
     </View>
