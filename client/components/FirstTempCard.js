@@ -11,13 +11,17 @@ const FirstTempCard = ({
 }) => {
   const { API } = process.env;
 
+  // console.log(`FirstTempCard API is ${API}`);
+  // console.log(`FirstTempCard firstOnCitySelect is ${firstOnSelectCity}`);
+  // console.log(`FirstTempCard firstData is : ${firstData}`);
   const [icon, setIcon] = useState("");
-
   useEffect(() => {
     if (!firstData) {
       console.log("No data available");
       return;
     }
+
+    // console.log("FirstTempCard firstData is:", firstData);
 
     fetch(
       `http://dataservice.accuweather.com/currentconditions/v1/${firstData}?apikey=${API}&metric=true&details=true`
@@ -30,7 +34,10 @@ const FirstTempCard = ({
         }
       })
       .then((data) => {
-        setFirstWeatherFetch(data);
+        console.log(data);
+        setFirstWeatherFetch(data); // Assuming `data` contains the weather icon URL
+
+        // console.log("FirstTempCard firstWeatherFetch is:", firstWeatherFetch);
       })
       .catch((error) => {
         console.log(`Error fetching data: ${error}`);
@@ -44,24 +51,22 @@ const FirstTempCard = ({
       console.log(`This is icon: ${weatherIcon}`);
     }
   }, [firstWeatherFetch]);
-
   return (
     <View style={styles.container}>
       {firstWeatherFetch && (
         <View>
           <Text style={styles.title}>{firstOnSelectCity}</Text>
           {icon && (
-            <SvgUri
-              width={50}
-              height={50}
+            <Image
               source={{
                 uri: `https://www.accuweather.com/images/weathericons/${icon}.svg`,
               }}
               style={styles.icon}
+              alt={"Weather Icon"}
             />
           )}
           <Text style={styles.description}>
-            {firstWeatherFetch[0].WeatherText}
+            {firstWeatherFetch && firstWeatherFetch[0].WeatherText}
           </Text>
           <View style={styles.InfoContainer}></View>
           <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
@@ -88,29 +93,21 @@ const FirstTempCard = ({
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // styles
     borderWidth: 1,
     borderColor: "brown",
   },
   icon: {
     width: 50,
     height: 50,
-    // resizeMode: "contain",
-    borderWidth: 1,
-    borderColor: "blue",
+    resizeMode: "contain",
   },
-  title: {
-    // Add any title styles here
-  },
-  description: {
-    // Add any description styles here
-  },
-  InfoContainer: {
-    // Add any InfoContainer styles here
-  },
+  title: {},
+  icon: {},
+  description: {},
+  InfoContainer: {},
 });
 
 export default FirstTempCard;
