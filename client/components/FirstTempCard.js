@@ -59,7 +59,7 @@ const FirstTempCard = ({
           {icon && (
             <Image
               source={{
-                uri: `https://www.accuweather.com/images/weathericons/${icon}.svg`,
+                uri: `https://www.accuweather.com/images/weathericons/6.svg`,
               }}
               style={styles.icon}
               alt={"Weather Icon"}
