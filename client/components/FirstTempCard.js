@@ -11,17 +11,13 @@ const FirstTempCard = ({
 }) => {
   const { API } = process.env;
 
-  // console.log(`FirstTempCard API is ${API}`);
-  // console.log(`FirstTempCard firstOnCitySelect is ${firstOnSelectCity}`);
-  // console.log(`FirstTempCard firstData is : ${firstData}`);
+  const [icon, setIcon] = useState("");
 
   useEffect(() => {
     if (!firstData) {
       console.log("No data available");
       return;
     }
-
-    // console.log("FirstTempCard firstData is:", firstData);
 
     fetch(
       `http://dataservice.accuweather.com/currentconditions/v1/${firstData}?apikey=${API}&metric=true&details=true`
@@ -34,27 +30,38 @@ const FirstTempCard = ({
         }
       })
       .then((data) => {
-        // console.log(data);
-        setFirstWeatherFetch(data); // Assuming `data` contains the weather icon URL
-        // console.log("FirstTempCard firstWeatherFetch is:", firstWeatherFetch);
+        setFirstWeatherFetch(data);
       })
       .catch((error) => {
         console.log(`Error fetching data: ${error}`);
       });
   }, [firstData, API]);
 
+  useEffect(() => {
+    if (firstWeatherFetch) {
+      const weatherIcon = firstWeatherFetch[0].WeatherIcon;
+      setIcon(weatherIcon);
+      console.log(`This is icon: ${weatherIcon}`);
+    }
+  }, [firstWeatherFetch]);
+
   return (
     <View style={styles.container}>
       {firstWeatherFetch && (
         <View>
           <Text style={styles.title}>{firstOnSelectCity}</Text>
-          {/* <Image
-            source={{ uri: firstWeatherFetch }}
-            style={styles.icon}
-            alt={"firstWeatherFetch"}
-          /> */}
+          {icon && (
+            <SvgUri
+              width={50}
+              height={50}
+              source={{
+                uri: `https://www.accuweather.com/images/weathericons/${icon}.svg`,
+              }}
+              style={styles.icon}
+            />
+          )}
           <Text style={styles.description}>
-            {firstWeatherFetch.WeatherText}
+            {firstWeatherFetch[0].WeatherText}
           </Text>
           <View style={styles.InfoContainer}></View>
           <Text style={styles.description}>{`Current Temperature: ${Math.ceil(
@@ -81,23 +88,28 @@ const FirstTempCard = ({
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    // styles
+    flex: 1,
     borderWidth: 1,
     borderColor: "brown",
   },
-  title: {
-    // styles
-  },
   icon: {
-    // styles
+    width: 50,
+    height: 50,
+    // resizeMode: "contain",
+    borderWidth: 1,
+    borderColor: "blue",
+  },
+  title: {
+    // Add any title styles here
   },
   description: {
-    // styles
+    // Add any description styles here
   },
   InfoContainer: {
-    // styles
+    // Add any InfoContainer styles here
   },
 });
 
