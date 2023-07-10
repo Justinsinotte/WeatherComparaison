@@ -73,12 +73,19 @@ const CityInputFirst = ({
         value={query}
         onChangeText={handleInputChange}
       />
-      <FlatList
-        data={firstInputText}
-        keyExtractor={(item) => item.Key}
-        renderItem={renderCityItem}
-        contentContainerStyle={styles.listContent}
-      />
+      <View
+        style={[
+          styles.listContainer,
+          { height: firstInputText ? firstInputText.length * 60 : 0 },
+        ]}
+      >
+        <FlatList
+          data={firstInputText}
+          keyExtractor={(item) => item.Key}
+          renderItem={renderCityItem}
+          contentContainerStyle={styles.listContent}
+        />
+      </View>
     </View>
   );
 };
@@ -98,7 +105,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   listContent: {
-    flexGrow: 1,
+    flexGrow: 0,
   },
 });
 
