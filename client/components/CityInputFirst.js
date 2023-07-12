@@ -92,7 +92,7 @@ const CityInputFirst = ({
 
 const styles = StyleSheet.create({
   container: {
-    borderWidth: 3,
+    borderWidth: 4,
     borderColor: "pink",
     flex: 0.2,
     backgroundColor: "white",
